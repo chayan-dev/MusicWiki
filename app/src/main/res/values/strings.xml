@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">MusicWiki</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="music_wiki">musicwiki</string>
+  <string name="welcome">Welcome!</string>
+  <string name="desc">Choose a genre to start with</string>
 </resources>
