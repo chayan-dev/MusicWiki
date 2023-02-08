@@ -5,56 +5,59 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.api.models.ArtistX
 import com.example.musicwiki.R
+import com.example.musicwiki.databinding.FragmentArtistsBinding
+import com.example.musicwiki.utils.Resource
+import com.xwray.groupie.GroupieAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ArtistsFragment(val genreName: String) : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ArtistsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ArtistsFragment : Fragment() {
-  // TODO: Rename and change types of parameters
-  private var param1: String? = null
-  private var param2: String? = null
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    arguments?.let {
-      param1 = it.getString(ARG_PARAM1)
-      param2 = it.getString(ARG_PARAM2)
-    }
-  }
+  private var binding: FragmentArtistsBinding? = null
+  val detailsViewModel by viewModels<DetailsViewModel>({requireParentFragment()})
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_artists, container, false)
+    binding = FragmentArtistsBinding.inflate(inflater,container, false)
+    return binding?.root
   }
 
-  companion object {
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ArtistsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    @JvmStatic
-    fun newInstance(param1: String, param2: String) =
-      ArtistsFragment().apply {
-        arguments = Bundle().apply {
-          putString(ARG_PARAM1, param1)
-          putString(ARG_PARAM2, param2)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    detailsViewModel.getTopArtists(genreName)
+
+    val adapter = GroupieAdapter()
+    binding?.artistRv?.adapter = adapter
+
+    detailsViewModel.topArtists.observe({lifecycle}){ response->
+      when(response){
+        is Resource.Success -> {
+          response.data?.let {
+            val artistList = it.topartists.artist.toArtistItem()
+            adapter.addAll(artistList)
+          }
         }
+        else -> {}
       }
+    }
+  }
+
+  private fun List<ArtistX>.toArtistItem(): List<ArtistItem>{
+    return this.map {
+      ArtistItem(it,
+        onClick = {albumName ->
+          findNavController().navigate(
+            R.id.action_homeFragment_to_genreDetailsFragment,
+            bundleOf("genreName" to albumName)
+          )
+        })
+    }
   }
 }

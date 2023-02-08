@@ -3,23 +3,36 @@ package com.example.api.sevices
 import com.example.api.models.*
 import com.example.api.sevices.Constants.Companion.API_KEY
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface LastfmAPI {
 
   @GET("2.0/")
-  fun getTags(
+  suspend fun getTags(
     @Query("method")
     method: String = "tag.getTopTags",
     @Query("api_key")
     key: String = API_KEY,
     @Query("format")
     format: String = "json"
-  ): Call<TagsResponse>
+  ): Response<TagsResponse>
 
   @GET("2.0/")
-  fun getTopAlbumsByTag(
+  suspend fun getTagDetails(
+    @Query("method")
+    method: String = "tag.getinfo",
+    @Query("tag")
+    tag: String,
+    @Query("api_key")
+    key: String = API_KEY,
+    @Query("format")
+    format: String = "json"
+  ): Response<GenreDetailsResponse>
+
+  @GET("2.0/")
+  suspend fun getTopAlbumsByTag(
     @Query("method")
     method: String = "tag.gettopalbums",
     @Query("tag")
@@ -28,10 +41,10 @@ interface LastfmAPI {
     key: String = API_KEY,
     @Query("format")
     format: String = "json"
-  ): Call<TopAlbumsResponse>
+  ): Response<TopAlbumsResponse>
 
   @GET("2.0/")
-  fun getTopArtistsByTag(
+  suspend fun getTopArtistsByTag(
     @Query("method")
     method: String = "tag.gettopartists",
     @Query("tag")
@@ -40,10 +53,10 @@ interface LastfmAPI {
     key: String = API_KEY,
     @Query("format")
     format: String = "json"
-  ): Call<TopArtistsResponse>
+  ): Response<TopArtistsResponse>
 
   @GET("2.0/")
-  fun getTopTracksByTag(
+  suspend fun getTopTracksByTag(
     @Query("method")
     method: String = "tag.gettoptracks",
     @Query("tag")
@@ -52,10 +65,10 @@ interface LastfmAPI {
     key: String = API_KEY,
     @Query("format")
     format: String = "json"
-  ): Call<TopTracksResponse>
+  ): Response<TopTracksResponse>
 
   @GET("2.0/")
-  fun getAlbumDetails(
+  suspend fun getAlbumDetails(
     @Query("method")
     method: String = "album.getinfo",
     @Query("api_key")
@@ -66,10 +79,10 @@ interface LastfmAPI {
     album: String,
     @Query("format")
     format: String = "json"
-  ): Call<AlbumDetailsResponse>
+  ): Response<AlbumDetailsResponse>
 
   @GET("2.0/")
-  fun getArtistDetails(
+  suspend fun getArtistDetails(
     @Query("method")
     method: String = "tag.gettoptracks",
     @Query("artist")
@@ -78,10 +91,10 @@ interface LastfmAPI {
     key: String = API_KEY,
     @Query("format")
     format: String = "json"
-  ): Call<ArtistDetailsResponse>
+  ): Response<ArtistDetailsResponse>
 
   @GET("2.0/")
-  fun getTopAlbumsByArtist(
+  suspend fun getTopAlbumsByArtist(
     @Query("method")
     method: String = "artist.gettopalbums",
     @Query("artist")
@@ -90,10 +103,10 @@ interface LastfmAPI {
     key: String = API_KEY,
     @Query("format")
     format: String = "json"
-  ): Call<TopAlbumsResponse>
+  ): Response<TopAlbumsResponse>
 
   @GET("2.0/")
-  fun getTopTracksByArtist(
+  suspend fun getTopTracksByArtist(
     @Query("method")
     method: String = "artist.gettoptracks",
     @Query("artist")
