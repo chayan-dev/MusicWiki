@@ -1,4 +1,4 @@
-package com.example.api.sevices
+package com.example.api.utils
 
 class Constants {
   companion object{

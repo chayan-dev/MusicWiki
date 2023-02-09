@@ -1,8 +1,7 @@
 package com.example.api.sevices
 
 import com.example.api.models.*
-import com.example.api.sevices.Constants.Companion.API_KEY
-import retrofit2.Call
+import com.example.api.utils.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
