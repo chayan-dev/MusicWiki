@@ -21,6 +21,22 @@ class DetailsViewModel(
   val artistDetails: MutableLiveData<Resource<ArtistDetailsResponse>> = MutableLiveData()
   val topTracksByArtist: MutableLiveData<Resource<TopTracksByArtistResponse>> = MutableLiveData()
   val topAlbumsByArtist: MutableLiveData<Resource<TopAlbumsByArtistResponse>> = MutableLiveData()
+  val genre:MutableLiveData<Resource<TagsResponse>> = MutableLiveData()
+
+  fun getGenre() = viewModelScope.launch {
+    genre.postValue(Resource.Loading())
+    val response = musicRepository.getTags()
+    genre.postValue(handleTagsResponse(response))
+  }
+
+  private fun handleTagsResponse(response: Response<TagsResponse>) : Resource<TagsResponse>{
+    if(response.isSuccessful){
+      response.body()?.let {  tagsResponse ->
+        return Resource.Success(tagsResponse)
+      }
+    }
+    return Resource.Error(response.message())
+  }
 
   fun getGenreDetails(tag: String) = viewModelScope.launch {
     genreDetails.postValue(Resource.Loading())

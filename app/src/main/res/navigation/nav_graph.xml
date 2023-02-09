@@ -75,5 +75,9 @@
     <argument
       android:name="artistName"
       app:argType="string" />
+    <action
+      android:id="@+id/action_artistDetailsFragment_to_genreDetailsFragment"
+      app:destination="@id/genreDetailsFragment"
+      app:popUpTo="@id/homeFragment"/>
   </fragment>
 </navigation>

@@ -23,9 +23,9 @@
     android:layout_marginTop="16dp"
     android:gravity="center"
     android:paddingHorizontal="12dp"
-    android:text="Rock"
+    tools:text="Rock"
     android:textColor="@color/black"
-    android:textSize="24sp"
+    android:textSize="26sp"
     android:textStyle="bold"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/back_btn" />
@@ -37,9 +37,10 @@
     android:layout_marginTop="8dp"
     android:paddingHorizontal="12dp"
     android:paddingVertical="8dp"
-    android:text="Rock music is a broad genre of popular music that originated as rock and roll in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and United Kingdom.[3] It has its roots in 1940s and 1950s rock and roll, a style that drew directly from the blues and rhythm and blues genres of African-American music and from country music. Rock also drew strongly from a number of other genres such as electric blues and folk, and incorporated influences from jazz, classical, and other musical styles."
+    tools:text="Rock music is a broad genre of popular music that originated as rock and roll in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and United Kingdom.[3] It has its roots in 1940s and 1950s rock and roll, a style that drew directly from the blues and rhythm and blues genres of African-American music and from country music. Rock also drew strongly from a number of other genres such as electric blues and folk, and incorporated influences from jazz, classical, and other musical styles."
     android:textColor="@color/black"
-    android:textSize="14sp"
+    android:textSize="16sp"
+    android:maxLines="10"
     app:layout_constraintTop_toBottomOf="@id/genre_name_tv"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -65,5 +66,15 @@
     android:layout_height="0dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tabs"/>
+
+  <include
+    android:id="@+id/loader"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    layout="@layout/layout_loader"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

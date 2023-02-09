@@ -46,7 +46,7 @@ class ArtistsFragment(
         is Resource.Success -> {
           response.data?.let {
             val artistList = it.topartists.artist.toArtistItem()
-            adapter.addAll(artistList)
+            adapter.updateAsync(artistList)
           }
         }
         else -> {}

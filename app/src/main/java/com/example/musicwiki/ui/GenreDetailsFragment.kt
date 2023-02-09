@@ -46,16 +46,24 @@ class GenreDetailsFragment : Fragment() {
 
     val genreName = args.genreName
     detailsViewModel.getGenreDetails(genreName)
+    detailsViewModel.getGenre()
 
     detailsViewModel.genreDetails.observe({lifecycle}){ response->
       when(response){
         is Resource.Success -> {
+          hideProgressBar()
           response.data?.let { details->
             binding?.let {
               it.genreNameTv.text = details.tag.name
               it.descTv.text = details.tag.wiki.summary
             }
           }
+        }
+        is Resource.Loading -> {
+          showProgressBar()
+        }
+        is Resource.Error->{
+          hideProgressBar()
         }
         else -> {}
       }
@@ -86,6 +94,13 @@ class GenreDetailsFragment : Fragment() {
     pager.adapter = adapter
     tab.setupWithViewPager(pager)
 
+  }
+
+  private fun hideProgressBar(){
+    binding?.loader?.root?.visibility =View.INVISIBLE
+  }
+  private fun showProgressBar(){
+    binding?.loader?.root?.visibility=View.VISIBLE
   }
 
   override fun onDestroyView() {

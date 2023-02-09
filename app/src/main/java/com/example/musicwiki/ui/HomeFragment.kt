@@ -1,6 +1,7 @@
 package com.example.musicwiki.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,10 +47,24 @@ class HomeFragment : Fragment() {
     musicViewModel.genre.observe({lifecycle}){ response->
       when(response){
         is Resource.Success -> {
+          hideProgressBar()
           response.data?.let {
             val genreList = it.toptags.tag.toGenreItem()
-            adapter.addAll(genreList)
+            adapter.addAll(genreList.slice(0..11))
+            binding?.let{ binding ->
+              binding.expandBtn.setOnClickListener {
+                binding.expandBtn.setImageResource(R.drawable.ic_arrow_down)
+                adapter.updateAsync(genreList)
+              }
+            }
+
           }
+        }
+        is Resource.Loading -> {
+          showProgressBar()
+        }
+        is Resource.Error->{
+          hideProgressBar()
         }
         else -> {}
       }
@@ -66,6 +81,13 @@ class HomeFragment : Fragment() {
         )
       })
     }
+  }
+
+  private fun hideProgressBar(){
+    binding?.loader?.root?.visibility =View.INVISIBLE
+  }
+  private fun showProgressBar(){
+    binding?.loader?.root?.visibility=View.VISIBLE
   }
 
 }

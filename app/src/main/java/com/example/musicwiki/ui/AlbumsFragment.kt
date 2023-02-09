@@ -47,7 +47,7 @@ class AlbumsFragment(
         is Resource.Success -> {
           response.data?.let {
             val albumList = it.albums.album.toAlbumItem()
-            adapter.addAll(albumList)
+            adapter.updateAsync(albumList)
           }
         }
         else -> {}

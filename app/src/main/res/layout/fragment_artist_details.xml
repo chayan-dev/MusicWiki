@@ -31,8 +31,8 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_marginBottom="32dp"
-    android:text="Tenacious D"
-    android:textColor="@color/white"
+    tools:text="Tenacious D"
+    android:textColor="@color/black"
     android:textSize="24sp"
     android:textStyle="bold"
     app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
@@ -58,17 +58,17 @@
         android:id="@+id/playcount_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="234K"
-        android:textColor="@color/white"
-        android:textSize="18dp"
+        tools:text="234K"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Playcount"
-        android:textColor="@color/white"
-        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
          />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -83,17 +83,17 @@
         android:id="@+id/followers_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="530K"
-        android:textColor="@color/white"
-        android:textSize="18dp"
+        tools:text="530K"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Followers"
-        android:textColor="@color/white"
-        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
          />
     </androidx.appcompat.widget.LinearLayoutCompat>
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -111,6 +111,16 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/cover_iv"
     tools:listitem="@layout/tag_item_layout" />
+
+  <include
+    android:id="@+id/loader"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    layout="@layout/layout_loader"/>
 
   <ScrollView
     android:layout_width="match_parent"
@@ -130,10 +140,10 @@
         android:layout_marginTop="8dp"
         android:paddingHorizontal="12dp"
         android:paddingVertical="8dp"
-        android:text="Rock music is a broad genre of popular music that originated as rock and roll in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and United Kingdom.[3] It has its roots in 1940s and 1950s rock and roll, a style that drew directly from the blues and rhythm and blues genres of African-American music and from country music. Rock also drew strongly from a number of other genres such as electric blues and folk, and incorporated influences from jazz, classical, and other musical styles."
+        tools:text="Rock music is a broad genre of popular music that originated as rock and roll in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and United Kingdom.[3] It has its roots in 1940s and 1950s rock and roll, a style that drew directly from the blues and rhythm and blues genres of African-American music and from country music. Rock also drew strongly from a number of other genres such as electric blues and folk, and incorporated influences from jazz, classical, and other musical styles."
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:maxLines="10"
+        android:maxLines="8"
         android:ellipsize="end"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +155,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Top Tracks"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:padding="4dp"
         app:layout_constraintTop_toBottomOf="@id/album_tv"
@@ -169,7 +179,7 @@
         android:layout_height="wrap_content"
         android:text="Top Tracks"
         android:padding="4dp"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/top_tracks_rv"
         app:layout_constraintStart_toStartOf="parent"/>

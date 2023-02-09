@@ -43,7 +43,7 @@ class TracksFragment(val genreName: String) : Fragment() {
         is Resource.Success -> {
           response.data?.tracks?.let {
             val trackList = it.track.toTrackItem()
-            adapter.addAll(trackList)
+            adapter.updateAsync(trackList)
           }
         }
         else -> {}
