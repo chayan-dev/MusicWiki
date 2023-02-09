@@ -11,7 +11,7 @@ data class TrackX(
     @Json(name = "@attr")
     val attr: AttrXXXXX,
     @Json(name = "duration")
-    val duration: Int,
+    val duration: Int?,
     @Json(name = "name")
     val name: String,
     @Json(name = "streamable")

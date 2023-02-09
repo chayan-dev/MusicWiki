@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.api.models.ArtistX
@@ -14,10 +15,14 @@ import com.example.musicwiki.databinding.FragmentArtistsBinding
 import com.example.musicwiki.utils.Resource
 import com.xwray.groupie.GroupieAdapter
 
-class ArtistsFragment(val genreName: String) : Fragment() {
+class ArtistsFragment(
+  val genreName: String,
+  val onItemClick: (artistName : String ) -> Unit
+) : Fragment() {
 
   private var binding: FragmentArtistsBinding? = null
-  val detailsViewModel by viewModels<DetailsViewModel>({requireParentFragment()})
+//  val detailsViewModel by viewModels<DetailsViewModel>({requireParentFragment()})
+  val detailsViewModel: DetailsViewModel by activityViewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -52,11 +57,8 @@ class ArtistsFragment(val genreName: String) : Fragment() {
   private fun List<ArtistX>.toArtistItem(): List<ArtistItem>{
     return this.map {
       ArtistItem(it,
-        onClick = {albumName ->
-          findNavController().navigate(
-            R.id.action_homeFragment_to_genreDetailsFragment,
-            bundleOf("genreName" to albumName)
-          )
+        onClick = { artistName ->
+          onItemClick(artistName)
         })
     }
   }

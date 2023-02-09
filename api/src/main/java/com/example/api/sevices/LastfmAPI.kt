@@ -84,7 +84,7 @@ interface LastfmAPI {
   @GET("2.0/")
   suspend fun getArtistDetails(
     @Query("method")
-    method: String = "tag.gettoptracks",
+    method: String = "artist.getinfo",
     @Query("artist")
     artist: String,
     @Query("api_key")
@@ -103,7 +103,7 @@ interface LastfmAPI {
     key: String = API_KEY,
     @Query("format")
     format: String = "json"
-  ): Response<TopAlbumsResponse>
+  ): Response<TopAlbumsByArtistResponse>
 
   @GET("2.0/")
   suspend fun getTopTracksByArtist(
@@ -115,5 +115,5 @@ interface LastfmAPI {
     key: String = API_KEY,
     @Query("format")
     format: String = "json"
-  ): Call<TopTracksResponse>
+  ): Response<TopTracksByArtistResponse>
 }

@@ -11,7 +11,7 @@ data class Track(
     @Json(name = "@attr")
     val attr: AttrXXXX,
     @Json(name = "duration")
-    val duration: String,
+    val duration: String?,
     @Json(name = "image")
     val image: List<ImageXX>,
     @Json(name = "mbid")

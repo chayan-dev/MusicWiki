@@ -57,12 +57,23 @@
     android:name="com.example.musicwiki.ui.AlbumDetailsFragment"
     android:label="AlbumDetailsFragment" >
     <argument
-      android:name="genreName"
+      android:name="albumName"
       app:argType="string" />
+    <argument
+      android:name="artistName"
+      app:argType="string" />
+    <action
+      android:id="@+id/action_albumDetailsFragment_to_genreDetailsFragment"
+      app:destination="@id/genreDetailsFragment"
+      app:popUpTo="@id/homeFragment"/>
   </fragment>
 
   <fragment
     android:id="@+id/artistDetailsFragment"
     android:name="com.example.musicwiki.ui.ArtistDetailsFragment"
-    android:label="ArtistDetailsFragment" />
+    android:label="ArtistDetailsFragment" >
+    <argument
+      android:name="artistName"
+      app:argType="string" />
+  </fragment>
 </navigation>

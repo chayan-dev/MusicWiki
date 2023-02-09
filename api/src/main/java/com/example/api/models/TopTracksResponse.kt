@@ -7,5 +7,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class TopTracksResponse(
     @Json(name = "tracks")
-    val tracks: Tracks
+    val tracks: Tracks?
 )

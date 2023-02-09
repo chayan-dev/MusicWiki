@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.api.models.Album
@@ -17,11 +18,12 @@ import com.xwray.groupie.GroupieAdapter
 
 class AlbumsFragment(
   val genreName: String,
-  val onItemClick: (genreName: String) -> Unit
+  val onItemClick: (albumName: String, artistName:String ) -> Unit
 ) : Fragment() {
 
   private var binding: FragmentAlbumsBinding? = null
-  val detailsViewModel by viewModels<DetailsViewModel>({requireParentFragment()})
+//  val detailsViewModel by viewModels<DetailsViewModel>({requireParentFragment()})
+  val detailsViewModel: DetailsViewModel by activityViewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -56,8 +58,8 @@ class AlbumsFragment(
   private fun List<Album>.toAlbumItem(): List<AlbumItem>{
     return this.map {
       AlbumItem(it,
-        onClick = {albumName ->
-          onItemClick(albumName)
+        onClick = {albumName, artistName ->
+          onItemClick(albumName, artistName)
         })
     }
   }

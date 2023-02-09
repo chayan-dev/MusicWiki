@@ -22,7 +22,7 @@ class MusicRepository {
   suspend fun getAlbumDetails(artist: String, album: String) =
     api.getAlbumDetails(artist= artist, album = album )
 
-  suspend fun getArtistDetails(artist: String, album: String) =
+  suspend fun getArtistDetails(artist: String) =
     api.getArtistDetails(artist= artist)
 
   suspend fun getTopAlbumsByArtist(artist: String)=

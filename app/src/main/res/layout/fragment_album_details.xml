@@ -52,7 +52,7 @@
     tools:listitem="@layout/tag_item_layout" />
 
   <androidx.appcompat.widget.AppCompatTextView
-    android:id="@+id/album_tv"
+    android:id="@+id/album_desc_tv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"

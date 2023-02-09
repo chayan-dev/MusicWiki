@@ -11,7 +11,7 @@ data class ArtistXXXX(
     @Json(name = "image")
     val image: List<ImageXXXX>,
     @Json(name = "mbid")
-    val mbid: String,
+    val mbid: String?,
     @Json(name = "name")
     val name: String,
     @Json(name = "ontour")

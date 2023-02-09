@@ -7,7 +7,7 @@ import com.xwray.groupie.databinding.BindableItem
 
 class ArtistItem(
   private val artist: ArtistX,
-  val onClick: (genreName: String) -> Unit
+  val onClick: (artistName: String) -> Unit
 ): BindableItem<ItemAlbumBinding>() {
 
   override fun bind(viewBinding: ItemAlbumBinding, position: Int) {

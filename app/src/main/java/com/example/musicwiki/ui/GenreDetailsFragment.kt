@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -24,16 +25,17 @@ class GenreDetailsFragment : Fragment() {
   private lateinit var pager: ViewPager
   private lateinit var tab: TabLayout
   val args: GenreDetailsFragmentArgs by navArgs()
-  lateinit var detailsViewModel: DetailsViewModel
+//  lateinit var detailsViewModel: DetailsViewModel
+  val detailsViewModel: DetailsViewModel by activityViewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    val musicRepository = MusicRepository()
-    val viewModelProviderFactory = DetailsViewModelProviderFactory(musicRepository)
-    detailsViewModel = ViewModelProvider(this, viewModelProviderFactory).get(DetailsViewModel::class.java)
+//    val musicRepository = MusicRepository()
+//    val viewModelProviderFactory = DetailsViewModelProviderFactory(musicRepository)
+//    detailsViewModel = ViewModelProvider(this, viewModelProviderFactory).get(DetailsViewModel::class.java)
 
     binding = FragmentGenreDetailsBinding.inflate(inflater,container,false)
     return binding?.root
@@ -64,13 +66,21 @@ class GenreDetailsFragment : Fragment() {
       tab = it.tabs
     }
     val adapter = ViewPagerAdapter(childFragmentManager)
-    adapter.addFragment(AlbumsFragment(genreName, onItemClick = {
+
+    adapter.addFragment(AlbumsFragment(genreName, onItemClick = { album,artist ->
       findNavController().navigate(
         R.id.action_genreDetailsFragment_to_albumDetailsFragment,
-        bundleOf("genreName" to genreName)
+        bundleOf("albumName" to album, "artistName" to artist )
       )
     }),"Albums")
-    adapter.addFragment(ArtistsFragment(genreName),"Artists")
+
+    adapter.addFragment(ArtistsFragment(genreName, onItemClick = { artist ->
+      findNavController().navigate(
+        R.id.action_genreDetailsFragment_to_artistDetailsFragment,
+        bundleOf("artistName" to artist )
+      )
+    }),"Artists")
+
     adapter.addFragment(TracksFragment(genreName), "Tracks")
 
     pager.adapter = adapter
