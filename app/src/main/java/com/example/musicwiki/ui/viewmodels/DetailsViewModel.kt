@@ -1,4 +1,4 @@
-package com.example.musicwiki.ui
+package com.example.musicwiki.ui.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +11,7 @@ import retrofit2.Response
 
 class DetailsViewModel(
   val musicRepository: MusicRepository
-): ViewModel() {
+) : ViewModel() {
 
   val genreDetails: MutableLiveData<Resource<GenreDetailsResponse>> = MutableLiveData()
   val topAlbums: MutableLiveData<Resource<TopAlbumsResponse>> = MutableLiveData()
@@ -21,7 +21,7 @@ class DetailsViewModel(
   val artistDetails: MutableLiveData<Resource<ArtistDetailsResponse>> = MutableLiveData()
   val topTracksByArtist: MutableLiveData<Resource<TopTracksByArtistResponse>> = MutableLiveData()
   val topAlbumsByArtist: MutableLiveData<Resource<TopAlbumsByArtistResponse>> = MutableLiveData()
-  val genre:MutableLiveData<Resource<TagsResponse>> = MutableLiveData()
+  val genre: MutableLiveData<Resource<TagsResponse>> = MutableLiveData()
 
   fun getGenre() = viewModelScope.launch {
     genre.postValue(Resource.Loading())
@@ -29,9 +29,9 @@ class DetailsViewModel(
     genre.postValue(handleTagsResponse(response))
   }
 
-  private fun handleTagsResponse(response: Response<TagsResponse>) : Resource<TagsResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagsResponse ->
+  private fun handleTagsResponse(response: Response<TagsResponse>): Resource<TagsResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagsResponse ->
         return Resource.Success(tagsResponse)
       }
     }
@@ -86,72 +86,72 @@ class DetailsViewModel(
     topAlbumsByArtist.postValue(handleTopAlbumsByArtistResponse(response))
   }
 
-  private fun handleGenreDetailsResponse(response: Response<GenreDetailsResponse>) : Resource<GenreDetailsResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagDetailResponse ->
+  private fun handleGenreDetailsResponse(response: Response<GenreDetailsResponse>): Resource<GenreDetailsResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagDetailResponse ->
         return Resource.Success(tagDetailResponse)
       }
     }
     return Resource.Error(response.message())
   }
 
-  private fun handleTopAlbumsResponse(response: Response<TopAlbumsResponse>) : Resource<TopAlbumsResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagDetailResponse ->
+  private fun handleTopAlbumsResponse(response: Response<TopAlbumsResponse>): Resource<TopAlbumsResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagDetailResponse ->
         return Resource.Success(tagDetailResponse)
       }
     }
     return Resource.Error(response.message())
   }
 
-  private fun handleTopArtistsResponse(response: Response<TopArtistsResponse>) : Resource<TopArtistsResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagDetailResponse ->
+  private fun handleTopArtistsResponse(response: Response<TopArtistsResponse>): Resource<TopArtistsResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagDetailResponse ->
         return Resource.Success(tagDetailResponse)
       }
     }
     return Resource.Error(response.message())
   }
 
-  private fun handleTopTracksResponse(response: Response<TopTracksResponse>) : Resource<TopTracksResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagDetailResponse ->
+  private fun handleTopTracksResponse(response: Response<TopTracksResponse>): Resource<TopTracksResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagDetailResponse ->
         return Resource.Success(tagDetailResponse)
       }
     }
     return Resource.Error(response.message())
   }
 
-  private fun handleAlbumDetailsResponse(response: Response<AlbumDetailsResponse>) : Resource<AlbumDetailsResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagDetailResponse ->
+  private fun handleAlbumDetailsResponse(response: Response<AlbumDetailsResponse>): Resource<AlbumDetailsResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagDetailResponse ->
         return Resource.Success(tagDetailResponse)
       }
     }
     return Resource.Error(response.message())
   }
 
-  private fun handleArtistDetailsResponse(response: Response<ArtistDetailsResponse>) : Resource<ArtistDetailsResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagDetailResponse ->
+  private fun handleArtistDetailsResponse(response: Response<ArtistDetailsResponse>): Resource<ArtistDetailsResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagDetailResponse ->
         return Resource.Success(tagDetailResponse)
       }
     }
     return Resource.Error(response.message())
   }
 
-  private fun handleTopTracksByArtistResponse(response: Response<TopTracksByArtistResponse>) : Resource<TopTracksByArtistResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagDetailResponse ->
+  private fun handleTopTracksByArtistResponse(response: Response<TopTracksByArtistResponse>): Resource<TopTracksByArtistResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagDetailResponse ->
         return Resource.Success(tagDetailResponse)
       }
     }
     return Resource.Error(response.message())
   }
 
-  private fun handleTopAlbumsByArtistResponse(response: Response<TopAlbumsByArtistResponse>) : Resource<TopAlbumsByArtistResponse>{
-    if(response.isSuccessful){
-      response.body()?.let {  tagDetailResponse ->
+  private fun handleTopAlbumsByArtistResponse(response: Response<TopAlbumsByArtistResponse>): Resource<TopAlbumsByArtistResponse> {
+    if (response.isSuccessful) {
+      response.body()?.let { tagDetailResponse ->
         return Resource.Success(tagDetailResponse)
       }
     }

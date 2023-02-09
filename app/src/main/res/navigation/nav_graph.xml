@@ -7,7 +7,7 @@
 
   <fragment
     android:id="@+id/homeFragment"
-    android:name="com.example.musicwiki.ui.HomeFragment"
+    android:name="com.example.musicwiki.ui.fragments.HomeFragment"
     android:label="fragment_home"
     tools:layout="@layout/fragment_home" >
     <action
@@ -17,7 +17,7 @@
 
   <fragment
     android:id="@+id/genreDetailsFragment"
-    android:name="com.example.musicwiki.ui.GenreDetailsFragment"
+    android:name="com.example.musicwiki.ui.fragments.GenreDetailsFragment"
     android:label="fragment_genre_details"
     tools:layout="@layout/fragment_genre_details" >
     <argument
@@ -33,14 +33,14 @@
 
   <fragment
     android:id="@+id/albumsFragment"
-    android:name="com.example.musicwiki.ui.AlbumsFragment"
+    android:name="com.example.musicwiki.ui.fragments.AlbumsFragment"
     android:label="fragment_albums"
     tools:layout="@layout/fragment_albums" >
   </fragment>
 
   <fragment
     android:id="@+id/artistsFragment"
-    android:name="com.example.musicwiki.ui.ArtistsFragment"
+    android:name="com.example.musicwiki.ui.fragments.ArtistsFragment"
     android:label="fragment_artists"
     tools:layout="@layout/fragment_artists" >
 
@@ -48,13 +48,13 @@
 
   <fragment
     android:id="@+id/tracksFragment"
-    android:name="com.example.musicwiki.ui.TracksFragment"
+    android:name="com.example.musicwiki.ui.fragments.TracksFragment"
     android:label="fragment_tracks"
     tools:layout="@layout/fragment_tracks" />
 
   <fragment
     android:id="@+id/albumDetailsFragment"
-    android:name="com.example.musicwiki.ui.AlbumDetailsFragment"
+    android:name="com.example.musicwiki.ui.fragments.AlbumDetailsFragment"
     android:label="AlbumDetailsFragment" >
     <argument
       android:name="albumName"
@@ -70,7 +70,7 @@
 
   <fragment
     android:id="@+id/artistDetailsFragment"
-    android:name="com.example.musicwiki.ui.ArtistDetailsFragment"
+    android:name="com.example.musicwiki.ui.fragments.ArtistDetailsFragment"
     android:label="ArtistDetailsFragment" >
     <argument
       android:name="artistName"

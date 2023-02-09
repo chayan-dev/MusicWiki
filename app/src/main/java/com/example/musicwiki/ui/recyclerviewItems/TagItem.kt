@@ -1,4 +1,4 @@
-package com.example.musicwiki.ui
+package com.example.musicwiki.ui.recyclerviewItems
 
 import com.example.api.models.Tag
 import com.example.musicwiki.R
@@ -6,10 +6,10 @@ import com.example.musicwiki.databinding.GenreItemLayoutBinding
 import com.example.musicwiki.databinding.TagItemLayoutBinding
 import com.xwray.groupie.databinding.BindableItem
 
-class TagItem (
+class TagItem(
   private val tag: Tag,
   val onClick: (genreName: String) -> Unit
-): BindableItem<GenreItemLayoutBinding>() {
+) : BindableItem<GenreItemLayoutBinding>() {
 
   override fun bind(viewBinding: GenreItemLayoutBinding, position: Int) {
     viewBinding.root.setOnClickListener { onClick(tag.name) }

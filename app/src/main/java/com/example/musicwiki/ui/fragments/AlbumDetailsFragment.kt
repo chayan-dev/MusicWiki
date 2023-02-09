@@ -1,4 +1,4 @@
-package com.example.musicwiki.ui
+package com.example.musicwiki.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +13,8 @@ import com.example.api.models.Tag
 import com.example.musicwiki.R
 import com.example.musicwiki.databinding.FragmentAlbumDetailsBinding
 import com.example.musicwiki.extensions.loadImage
+import com.example.musicwiki.ui.viewmodels.DetailsViewModel
+import com.example.musicwiki.ui.recyclerviewItems.TagItem
 import com.example.musicwiki.utils.Resource
 import com.xwray.groupie.GroupieAdapter
 
@@ -26,7 +28,7 @@ class AlbumDetailsFragment : Fragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    binding = FragmentAlbumDetailsBinding.inflate(inflater,container,false)
+    binding = FragmentAlbumDetailsBinding.inflate(inflater, container, false)
     return binding?.root
   }
 
@@ -35,21 +37,16 @@ class AlbumDetailsFragment : Fragment() {
 
     val albumName = args.albumName
     val artistName = args.artistName
-    viewModel.getAlbumDetails(albumName,artistName)
-//    binding?.albumDescTv?.setOnClickListener {
-//      findNavController().navigate(
-//        R.id.action_albumDetailsFragment_to_genreDetailsFragment,
-//        bundleOf("genreName" to "rock")
-//      )
-//    }
+    viewModel.getAlbumDetails(albumName, artistName)
+
     val adapter = GroupieAdapter()
     binding?.genreRv?.adapter = adapter
 
-    viewModel.albumDetails.observe({lifecycle}){ response->
-      when(response){
+    viewModel.albumDetails.observe({ lifecycle }) { response ->
+      when (response) {
         is Resource.Success -> {
           hideProgressBar()
-          response.data?.let { details->
+          response.data?.let { details ->
             binding?.let {
               it.coverIv.loadImage(details.album.image[1].text)
               it.titleTv.text = details.album.name
@@ -61,15 +58,15 @@ class AlbumDetailsFragment : Fragment() {
         is Resource.Loading -> {
           showProgressBar()
         }
-        is Resource.Error->{
+        is Resource.Error -> {
           hideProgressBar()
         }
         else -> {}
       }
     }
 
-    viewModel.genre.observe({lifecycle}){ response->
-      when(response){
+    viewModel.genre.observe({ lifecycle }) { response ->
+      when (response) {
         is Resource.Success -> {
           hideProgressBar()
           response.data?.let {
@@ -80,7 +77,7 @@ class AlbumDetailsFragment : Fragment() {
         is Resource.Loading -> {
           showProgressBar()
         }
-        is Resource.Error->{
+        is Resource.Error -> {
           hideProgressBar()
         }
         else -> {}
@@ -88,10 +85,10 @@ class AlbumDetailsFragment : Fragment() {
     }
   }
 
-  private fun List<Tag>.toTagItem(): List<TagItem>{
+  private fun List<Tag>.toTagItem(): List<TagItem> {
     return this.map {
       TagItem(it,
-        onClick = {genreName ->
+        onClick = { genreName ->
           findNavController().navigate(
             R.id.action_albumDetailsFragment_to_genreDetailsFragment,
             bundleOf("genreName" to genreName)
@@ -100,11 +97,12 @@ class AlbumDetailsFragment : Fragment() {
     }
   }
 
-  private fun hideProgressBar(){
-    binding?.loader?.root?.visibility =View.INVISIBLE
+  private fun hideProgressBar() {
+    binding?.loader?.root?.visibility = View.INVISIBLE
   }
-  private fun showProgressBar(){
-    binding?.loader?.root?.visibility=View.VISIBLE
+
+  private fun showProgressBar() {
+    binding?.loader?.root?.visibility = View.VISIBLE
   }
 
 }

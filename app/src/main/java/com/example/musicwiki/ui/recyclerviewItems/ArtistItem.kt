@@ -1,4 +1,4 @@
-package com.example.musicwiki.ui
+package com.example.musicwiki.ui.recyclerviewItems
 
 import android.graphics.Color
 import com.example.api.models.ArtistX

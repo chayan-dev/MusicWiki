@@ -1,4 +1,4 @@
-package com.example.musicwiki.ui
+package com.example.musicwiki.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,15 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
-import com.example.musicwiki.MusicViewModel
 import com.example.musicwiki.R
 import com.example.musicwiki.databinding.FragmentGenreDetailsBinding
-import com.example.musicwiki.repository.MusicRepository
+import com.example.musicwiki.ui.viewmodels.DetailsViewModel
 import com.example.musicwiki.utils.Resource
 import com.google.android.material.tabs.TabLayout
 
@@ -25,7 +22,6 @@ class GenreDetailsFragment : Fragment() {
   private lateinit var pager: ViewPager
   private lateinit var tab: TabLayout
   val args: GenreDetailsFragmentArgs by navArgs()
-//  lateinit var detailsViewModel: DetailsViewModel
   val detailsViewModel: DetailsViewModel by activityViewModels()
 
   override fun onCreateView(
@@ -33,11 +29,7 @@ class GenreDetailsFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-//    val musicRepository = MusicRepository()
-//    val viewModelProviderFactory = DetailsViewModelProviderFactory(musicRepository)
-//    detailsViewModel = ViewModelProvider(this, viewModelProviderFactory).get(DetailsViewModel::class.java)
-
-    binding = FragmentGenreDetailsBinding.inflate(inflater,container,false)
+    binding = FragmentGenreDetailsBinding.inflate(inflater, container, false)
     return binding?.root
   }
 
@@ -48,11 +40,11 @@ class GenreDetailsFragment : Fragment() {
     detailsViewModel.getGenreDetails(genreName)
     detailsViewModel.getGenre()
 
-    detailsViewModel.genreDetails.observe({lifecycle}){ response->
-      when(response){
+    detailsViewModel.genreDetails.observe({ lifecycle }) { response ->
+      when (response) {
         is Resource.Success -> {
           hideProgressBar()
-          response.data?.let { details->
+          response.data?.let { details ->
             binding?.let {
               it.genreNameTv.text = details.tag.name
               it.descTv.text = details.tag.wiki.summary
@@ -62,7 +54,7 @@ class GenreDetailsFragment : Fragment() {
         is Resource.Loading -> {
           showProgressBar()
         }
-        is Resource.Error->{
+        is Resource.Error -> {
           hideProgressBar()
         }
         else -> {}
@@ -75,19 +67,19 @@ class GenreDetailsFragment : Fragment() {
     }
     val adapter = ViewPagerAdapter(childFragmentManager)
 
-    adapter.addFragment(AlbumsFragment(genreName, onItemClick = { album,artist ->
+    adapter.addFragment(AlbumsFragment(genreName, onItemClick = { album, artist ->
       findNavController().navigate(
         R.id.action_genreDetailsFragment_to_albumDetailsFragment,
-        bundleOf("albumName" to album, "artistName" to artist )
+        bundleOf("albumName" to album, "artistName" to artist)
       )
-    }),"Albums")
+    }), "Albums")
 
     adapter.addFragment(ArtistsFragment(genreName, onItemClick = { artist ->
       findNavController().navigate(
         R.id.action_genreDetailsFragment_to_artistDetailsFragment,
-        bundleOf("artistName" to artist )
+        bundleOf("artistName" to artist)
       )
-    }),"Artists")
+    }), "Artists")
 
     adapter.addFragment(TracksFragment(genreName), "Tracks")
 
@@ -96,11 +88,12 @@ class GenreDetailsFragment : Fragment() {
 
   }
 
-  private fun hideProgressBar(){
-    binding?.loader?.root?.visibility =View.INVISIBLE
+  private fun hideProgressBar() {
+    binding?.loader?.root?.visibility = View.INVISIBLE
   }
-  private fun showProgressBar(){
-    binding?.loader?.root?.visibility=View.VISIBLE
+
+  private fun showProgressBar() {
+    binding?.loader?.root?.visibility = View.VISIBLE
   }
 
   override fun onDestroyView() {
